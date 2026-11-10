@@ -1,8 +1,12 @@
 # AI Kids Animation
 
-A planned, highly automated pipeline for producing children's animated videos at minimal cost, with a human approval step before publishing.
+Reusable pipeline for Arabic kids' cartoon episodes: set up the characters, backgrounds and voices once in `series/`,
+then send only a script for each episode and get a finished video to review.
 
-**Current phase:** research and architecture. No implementation yet.
+- `CLAUDE.md`: how an episode is produced (what Claude does when a script arrives)
+- `series/README.md`: what to prepare once (characters, backgrounds, voices)
+- `docs/WORKFLOW.md`: the script format and the steps per episode
+- `docs/decision.md`, `docs/research-report.md`: earlier research and cost decision
+- `tools/`: renderer. Test it with `python3 tools/make_demo.py` (placeholder art in `demo/`)
 
-- [Build-vs-platform decision (Arabic)](docs/decision.md): cost, quality and effort comparison, with a recommendation.
-- [Research & architecture report](docs/research-report.md): feasibility, approaches compared, existing tools, recommended architecture, cost analysis, risks, and the final recommendation.
+Setup: `python3 -m venv .venv --system-site-packages && .venv/bin/pip install -r requirements.txt` (needs ffmpeg).

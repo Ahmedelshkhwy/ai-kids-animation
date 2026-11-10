@@ -1,0 +1,52 @@
+{
+  "name": "ahmed",
+  "canvas": [
+    500,
+    800
+  ],
+  "height_ratio": 0.62,
+  "feet": [
+    250,
+    788
+  ],
+  "layers": [
+    {
+      "role": "arm",
+      "id": "left",
+      "image": "arm_left.png",
+      "pivot": [
+        170,
+        330
+      ],
+      "up": -150,
+      "point": -95
+    },
+    {
+      "role": "static",
+      "image": "body.png"
+    },
+    {
+      "role": "eyes",
+      "open": "eyes_open.png",
+      "closed": "eyes_closed.png"
+    },
+    {
+      "role": "mouth",
+      "closed": "mouth_closed.png",
+      "half": "mouth_half.png",
+      "open": "mouth_open.png"
+    },
+    {
+      "role": "arm",
+      "id": "right",
+      "image": "arm_right.png",
+      "pivot": [
+        330,
+        330
+      ],
+      "up": 150,
+      "point": 95,
+      "main": true
+    }
+  ]
+}

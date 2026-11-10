@@ -1,0 +1,132 @@
+{
+  "title": "demo",
+  "shots": [
+    {
+      "background": "street",
+      "camera": {
+        "move": "push_in",
+        "zoom": 1.15
+      },
+      "transition": "fade",
+      "characters": [
+        {
+          "id": "ahmed",
+          "pos": [
+            0.3,
+            0.97
+          ],
+          "enter": "left"
+        },
+        {
+          "id": "mona",
+          "pos": [
+            0.7,
+            0.97
+          ],
+          "flip": true
+        }
+      ],
+      "lines": [
+        {
+          "id": 1,
+          "speaker": "ahmed",
+          "text": "أهلاً يا منى! تعالي نلعب في الشارع",
+          "gesture": "raise"
+        },
+        {
+          "id": 2,
+          "speaker": "mona",
+          "text": "مش هينفع يا أحمد، لازم أخلص الواجب الأول",
+          "gesture": "none"
+        }
+      ]
+    },
+    {
+      "background": "street",
+      "camera": {
+        "move": "pan_right",
+        "zoom": 1.12
+      },
+      "characters": [
+        {
+          "id": "ahmed",
+          "pos": [
+            0.35,
+            0.97
+          ]
+        },
+        {
+          "id": "mona",
+          "pos": [
+            0.75,
+            0.97
+          ],
+          "flip": true
+        }
+      ],
+      "lines": [
+        {
+          "id": 3,
+          "speaker": "ahmed",
+          "text": "طيب هستناكي هنا لحد ما تخلصي",
+          "gesture": "point"
+        },
+        {
+          "id": 4,
+          "speaker": "mona",
+          "text": "تمام، هرجعلك بسرعة!",
+          "gesture": "wave",
+          "move_to": [
+            0.9,
+            0.97
+          ]
+        }
+      ],
+      "shake": {
+        "at": 2.8,
+        "dur": 0.4
+      }
+    },
+    {
+      "background": "yard",
+      "camera": {
+        "move": "pull_out",
+        "zoom": 1.12
+      },
+      "transition": "fade",
+      "characters": [
+        {
+          "id": "ahmed",
+          "pos": [
+            0.35,
+            0.97
+          ],
+          "enter": "left"
+        },
+        {
+          "id": "mona",
+          "pos": [
+            0.65,
+            0.97
+          ],
+          "flip": true,
+          "enter": "right"
+        }
+      ],
+      "lines": [
+        {
+          "id": 5,
+          "speaker": "ahmed",
+          "text": "يلا نروح الحديقة",
+          "gesture": "raise"
+        },
+        {
+          "id": 6,
+          "speaker": "mona",
+          "text": "حلو قوي، يلا بينا",
+          "gesture": "none"
+        }
+      ]
+    }
+  ]
+}

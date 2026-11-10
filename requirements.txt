@@ -1,0 +1,4 @@
+numpy
+Pillow
+arabic-reshaper
+python-bidi
