@@ -1,0 +1,52 @@
+{
+ "name": "boy1",
+ "canvas": [
+  440,
+  630
+ ],
+ "height_ratio": 0.66,
+ "feet": [
+  220,
+  584
+ ],
+ "layers": [
+  {
+   "role": "arm",
+   "id": "back",
+   "image": "arm_back.png",
+   "pivot": [
+    162,
+    231
+   ],
+   "up": -150,
+   "point": -95
+  },
+  {
+   "role": "static",
+   "image": "body.png"
+  },
+  {
+   "role": "eyes",
+   "open": "eyes_open.png",
+   "closed": "eyes_closed.png"
+  },
+  {
+   "role": "mouth",
+   "closed": "mouth_closed.png",
+   "half": "mouth_half.png",
+   "open": "mouth_open.png"
+  },
+  {
+   "role": "arm",
+   "id": "front",
+   "image": "arm_front.png",
+   "pivot": [
+    277,
+    231
+   ],
+   "up": 150,
+   "point": 95,
+   "main": true
+  }
+ ]
+}
