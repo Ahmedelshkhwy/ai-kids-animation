@@ -1,3 +1,6 @@
 {
-  "example_character": {"provider": "manual", "note": "boy, about 8, street kid, Egyptian dialect, lively"}
+  "sunbul": {
+    "provider": "manual",
+    "note": "boy, cheerful young storyteller, Arabic (ElevenLabs: Chutki - Cute Young Kids Storyteller, PVC)"
+  }
 }

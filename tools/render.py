@@ -49,6 +49,14 @@ def _camera(shot, t, length):
     return zoom, cx, cy, shx, shy
 
 
+def _gestures(ln):
+    """[{at, dur, type}] seconds from the line start. 'gesture' alone = the whole line."""
+    if ln.get("gestures"):
+        return ln["gestures"]
+    g = ln.get("gesture", "none")
+    return [] if g == "none" else [{"at": 0.0, "dur": ln["dur"], "type": g}]
+
+
 def _segments(job, cid, fps):
     """Per-character line segments with mouth states."""
     segs = []
@@ -61,7 +69,7 @@ def _segments(job, cid, fps):
         energy = np.convolve(states / 2.0, np.ones(3) / 3, mode="same")
         segs.append({"s": ln["local_start"], "e": ln["local_start"] + ln["dur"],
                      "states": states, "energy": energy, "emotion": ln.get("emotion", "neutral"),
-                     "gesture": ln.get("gesture", "none"), "move_to": ln.get("move_to")})
+                     "gestures": _gestures(ln), "move_to": ln.get("move_to")})
     return segs
 
 
@@ -129,14 +137,16 @@ def render_shot(args):
             if seg:
                 idx = min(int((t - seg["s"]) * fps), len(seg["states"]) - 1)
                 mouth, energy = int(seg["states"][idx]), float(seg["energy"][idx])
-                gest = seg["gesture"]
-                gf = gesture_factor(t - seg["s"], seg["e"] - seg["s"])
+                for g in seg["gestures"]:
+                    lt = t - seg["s"] - g["at"]
+                    if 0 <= lt < g["dur"]:
+                        gest, gf = g["type"], gesture_factor(lt, g["dur"])
             blink = any(0 <= t - b < 0.14 for b in a["blinks"])
             amp = 3.0 + (4.0 if seg else 0.0)
             eye = (amp * math.sin(2 * math.pi * t / 1.7 + a["phase"]),
                    amp * 0.5 * math.sin(2 * math.pi * t / 2.3 + a["phase"] * 2))
             angles = ch.arm_angles(gest, gf, t)
-            spr, fx, fy = ch.sprite(a["k"], mouth, blink, eye, angles, emotion, a["flip"])
+            spr, fx, fy = ch.sprite(a["k"], mouth, blink, eye, angles, emotion, a["flip"], gest)
 
             px, py = a["pos"]
             for (m0, m1, p0, p1) in a["moves"]:

@@ -40,6 +40,8 @@ Setup once per session: `python3 -m venv .venv --system-site-packages && .venv/b
   "characters": [{"id": "ahmed", "pos": [0.3, 0.97], "scale": 1.0, "flip": false, "enter": "left", "exit": "none"}],
   "lines": [{"id": 1, "speaker": "ahmed", "text": "...", "emotion": "neutral",
              "gesture": "raise", "move_to": [0.5, 0.97]}],
+  // instead of "gesture" (whole line): timed gestures, seconds from the line start
+  //   "gestures": [{"at": 0.3, "dur": 1.8, "type": "wave"}, {"at": 5.0, "dur": 1.7, "type": "point"}]
   "sfx": [{"file": "sfx/pop.wav", "at": 0.5, "volume": 0.8}],
   "pad_before": 0.3, "pad_after": 0.5, "duration": 2.0     // duration only for shots without lines
 }]}
@@ -47,7 +49,8 @@ Setup once per session: `python3 -m venv .venv --system-site-packages && .venv/b
 
 - `pos` = [x centre, feet line] as fractions of the frame (0..1). Feet around 0.95 to 0.97. `flip: true` mirrors the character so it faces left.
 - `enter`/`exit`: `left` or `right` slide in/out (0.6 s). `move_to` walks the speaker during the first 0.8 s of a line.
-- `gesture`: `none`, `raise`, `point`, `wave`, `both_raise`. Applies to the speaker's main arm while they talk.
+- `gesture`: `none`, `raise`, `point`, `wave`, `both_raise`. Applies to the speaker's main arm while they talk. Prefer `gestures` (timed list) for long lines so the arm is not raised for the whole sentence. Characters with `poses` on their arm layers (see `character.json`) swap the hand: fist at rest, open hand for raise/wave, pointing hand for point.
+- A long recording can be split at its pauses (`ffmpeg ... silencedetect`) into one audio file per sentence, so each sentence gets its own subtitle and gestures.
 - `emotion`: swaps the images listed under `emotions` in `character.json` (if defined). Otherwise ignored.
 - Line `id`s are unique, increasing from 1 across the whole episode. Shots of about 4 to 12 seconds, 1 to 3 lines each.
 - Vary camera moves between shots. Use `fade` for scene changes, `cut` inside a scene.

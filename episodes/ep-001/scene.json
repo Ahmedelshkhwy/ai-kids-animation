@@ -1,0 +1,83 @@
+{
+  "title": "ep-001 test",
+  "shots": [
+    {
+      "background": "placeholder_plain",
+      "camera": {
+        "move": "push_in",
+        "zoom": 1.1,
+        "focus": [
+          0.5,
+          0.35
+        ]
+      },
+      "transition": "fade",
+      "characters": [
+        {
+          "id": "sunbul",
+          "pos": [
+            0.5,
+            1.13
+          ],
+          "scale": 1.35,
+          "enter": "left"
+        }
+      ],
+      "lines": [
+        {
+          "id": 1,
+          "speaker": "sunbul",
+          "text": "مرحبا بك ياعزيزي!",
+          "gestures": [
+            {
+              "at": 0.1,
+              "dur": 1.7,
+              "type": "wave"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "speaker": "sunbul",
+          "text": "انا سنبل بطل هذه الحلقة وسوف اخبرك باشياء جديده تماما!",
+          "gestures": [
+            {
+              "at": 0.3,
+              "dur": 1.8,
+              "type": "raise"
+            },
+            {
+              "at": 5.0,
+              "dur": 1.7,
+              "type": "point"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "speaker": "sunbul",
+          "text": "سوف اكون سعيدا جدا اذا اعجبك حلقة اليوم..",
+          "gestures": [
+            {
+              "at": 0.5,
+              "dur": 2.2,
+              "type": "both_raise"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "speaker": "sunbul",
+          "text": "هيا بنا نبدأ!",
+          "gestures": [
+            {
+              "at": 0.1,
+              "dur": 1.1,
+              "type": "raise"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

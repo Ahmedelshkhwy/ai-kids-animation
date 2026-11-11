@@ -39,6 +39,7 @@ arm is not cut off.
 - Layers are drawn first to last (back to front). Put an arm *before* the body to draw it behind.
 - `pivot` = the shoulder point in canvas pixels. `up` / `point` = rotation in degrees (counter-clockwise is positive)
   for a raised / pointing arm. An arm on the right side of the image uses a positive angle, on the left a negative one.
+- An arm layer can have `"poses": {"rest": "...", "open": "...", "point": "..."}`: arm images with different hands (fist / open hand / pointing); the gesture picks the pose. See `characters/sunbul/`.
 - `main: true` marks the arm used for `raise` / `point` / `wave`. `both_raise` moves all arms.
 - `height_ratio` = character height as a fraction of the frame height. `feet` = where the feet touch the ground.
 - Eyes that are just two dots work: the whole eye layer drifts a few pixels so they look alive.

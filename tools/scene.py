@@ -73,9 +73,10 @@ def validate(scene, cfg, series_dir, ep_dir):
             seen_ids.add(lid)
             if line.get("speaker") not in present:
                 errors.append(f"{tag} line {lid}: speaker '{line.get('speaker')}' is not in the shot's characters")
-            g = line.get("gesture", "none")
-            if g not in GESTURES:
-                errors.append(f"{tag} line {lid}: unknown gesture '{g}' (use {sorted(GESTURES)})")
+            gl = [line.get("gesture", "none")] + [x.get("type") for x in line.get("gestures", [])]
+            for g in gl:
+                if g not in GESTURES:
+                    errors.append(f"{tag} line {lid}: unknown gesture '{g}' (use {sorted(GESTURES)})")
             if not audio.find_line_audio(ep_dir, line):
                 warnings.append(f"line {lid}: no audio file (audio/{int(lid):03d}.*), timing is estimated")
     return errors, warnings
@@ -93,6 +94,7 @@ def _check_character(series_dir, cid, errors):
         for k in ("image", "open", "closed", "half"):
             if L.get(k):
                 files.append(L[k])
+        files += list(L.get("poses", {}).values())
     for emo in cfg.get("emotions", {}).values():
         for role in emo.values():
             files += list(role.values())

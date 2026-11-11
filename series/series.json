@@ -3,6 +3,10 @@
   "width": 1280,
   "height": 720,
   "fps": 24,
-  "gap": 0.25,
-  "subtitles": {"burn_in": true, "size": 46, "bottom": 0.08}
+  "gap": 0.1,
+  "subtitles": {
+    "burn_in": true,
+    "size": 42,
+    "bottom": 0.04
+  }
 }

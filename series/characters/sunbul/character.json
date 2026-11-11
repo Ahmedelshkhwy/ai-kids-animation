@@ -1,0 +1,62 @@
+{
+ "name": "sunbul",
+ "canvas": [
+  640,
+  1000
+ ],
+ "height_ratio": 0.66,
+ "feet": [
+  320,
+  939
+ ],
+ "layers": [
+  {
+   "role": "static",
+   "image": "body.png"
+  },
+  {
+   "role": "eyes",
+   "open": "eyes_open.png",
+   "closed": "eyes_closed.png"
+  },
+  {
+   "role": "mouth",
+   "closed": "mouth_closed.png",
+   "half": "mouth_half.png",
+   "open": "mouth_open.png"
+  },
+  {
+   "role": "arm",
+   "id": "l",
+   "image": "arm_l_rest.png",
+   "pivot": [
+    200,
+    348
+   ],
+   "up": -150,
+   "point": -95,
+   "poses": {
+    "rest": "arm_l_rest.png",
+    "open": "arm_l_open.png",
+    "point": "arm_l_point.png"
+   }
+  },
+  {
+   "role": "arm",
+   "id": "r",
+   "image": "arm_r_rest.png",
+   "pivot": [
+    441,
+    348
+   ],
+   "up": 150,
+   "point": 95,
+   "main": true,
+   "poses": {
+    "rest": "arm_r_rest.png",
+    "open": "arm_r_open.png",
+    "point": "arm_r_point.png"
+   }
+  }
+ ]
+}

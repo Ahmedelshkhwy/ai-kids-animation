@@ -68,7 +68,21 @@ class Character:
             out[L["id"]] = ang
         return out
 
-    def sprite(self, k, mouth, blink, eye_off, angles, emotion, flip):
+    def _pose_image(self, L, gesture):
+        """Arm image for the gesture (rest / open hand / pointing), if the layer defines poses."""
+        poses = L.get("poses")
+        if not poses:
+            return L["image"]
+        is_main = L is self.main_arm
+        if gesture == "point" and is_main:
+            key = "point"
+        elif (gesture in ("raise", "wave") and is_main) or gesture == "both_raise":
+            key = "open"
+        else:
+            key = "rest"
+        return poses.get(key, L["image"])
+
+    def sprite(self, k, mouth, blink, eye_off, angles, emotion, flip, gesture="none"):
         W, H = round(self.cw * k), round(self.ch * k)
         base = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         emo = self.cfg.get("emotions", {}).get(emotion, {})
@@ -77,7 +91,7 @@ class Character:
             if role == "static":
                 base.alpha_composite(self._img(L["image"], k))
             elif role == "arm":
-                fn = emo.get("arm", {}).get(L["id"], L["image"])
+                fn = emo.get("arm", {}).get(L["id"], self._pose_image(L, gesture))
                 base.alpha_composite(self._arm_img(fn, k, angles.get(L["id"], 0), L["pivot"]))
             elif role == "eyes":
                 key = "closed" if blink and L.get("closed") else "open"
