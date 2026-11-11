@@ -95,7 +95,7 @@ N["leg_a"], N["leg_b"] = scaled(N["leg_a"], LEG_K), scaled(N["leg_b"], LEG_K)
 FACE_K = N["head"].width / 253.0          # the face parts were drawn for a 253 px wide head
 F = {k: scaled(v, FACE_K) for k, v in F.items()}
 
-CW, CH = 760, 730
+CW, CH = 760, 770
 CX = CW // 2
 
 
@@ -113,11 +113,23 @@ def cx_top(im, frac=0.2):
     return xs.mean()
 
 
+# ---------- longer neck (the stub on the sheet is too short to reach the hood opening) ----------
+def extend_neck(im, extra=46, band=6):
+    a = np.array(im)
+    ext = np.array(Image.fromarray(a[-band:]).resize((im.width, extra), Image.NEAREST))
+    return Image.fromarray(np.concatenate([a, ext], axis=0))
+
+
+HEAD0_H = N["head"].height
+_w = (np.array(N["head"])[..., 3] > 128).sum(axis=1)
+SKULL_H = next(i for i in range(HEAD0_H // 2, HEAD0_H) if _w[i] <= 0.4 * _w.max())
+N["head"] = extend_neck(N["head"])
+
 # ---------- layout ----------
 head_w, head_h = N["head"].size
 head_x, head_y = CX - head_w // 2, 18
 torso_w, torso_h = N["torso"].size
-torso_x, torso_y = CX - torso_w // 2, head_y + head_h - 38
+torso_x, torso_y = CX - torso_w // 2, head_y + SKULL_H + 4
 shorts_y = torso_y + torso_h - 28
 sh_l_x, sh_r_x = CX - N["shorts_l"].width + 2, CX - 2
 leg_y = shorts_y + N["shorts_l"].height - 40
@@ -135,7 +147,7 @@ pivot_r = (arm_r_pos[0] + arm_w / 2, arm_r_pos[1] + 24)
 
 # ---------- face ----------
 face_cx = head_x + head_w / 2
-EYE_Y, MOUTH_Y, NOSE_Y = head_y + round(head_h * 0.40), head_y + round(head_h * 0.62), head_y + round(head_h * 0.505)
+EYE_Y, MOUTH_Y, NOSE_Y = head_y + round(HEAD0_H * 0.40), head_y + round(HEAD0_H * 0.62), head_y + round(HEAD0_H * 0.505)
 
 
 def centred(c, im, cx, cy):
@@ -167,7 +179,6 @@ navy = tuple(int(v) for v in np.median(np.array(N["shorts_l"])[60:100, 20:60, :3
 ImageDraw.Draw(body).rectangle((CX - 14, shorts_y + 2, CX + 14, shorts_y + 60), fill=navy)
 put(body, N["shorts_l"], (sh_l_x, shorts_y))
 put(body, N["shorts_r"], (sh_r_x, shorts_y))
-body.alpha_composite(hood)
 put(body, N["head"], (head_x, head_y))
 put(body, N["torso"], (torso_x, torso_y))
 hair = scaled(N["hair"], 1.1)
@@ -187,7 +198,7 @@ layers = {
     "mouth_closed": single(F["mouth_closed"], MOUTH_Y), "mouth_half": single(F["mouth_half"], MOUTH_Y),
     "mouth_open": single(F["mouth_open"], MOUTH_Y),
 }
-arm_l, arm_r = N["arm"], mirror(N["arm"])
+arm_l, arm_r = mirror(N["arm"]), N["arm"]
 sleeve_l, sleeve_r = N["sleeve_a"], mirror(N["sleeve_a"])
 for name, im, pos in (("arm_l", arm_l, arm_l_pos), ("arm_r", arm_r, arm_r_pos),
                       ("sleeve_l", sleeve_l, sleeve_l_pos), ("sleeve_r", sleeve_r, sleeve_r_pos)):
