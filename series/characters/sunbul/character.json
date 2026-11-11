@@ -1,13 +1,13 @@
 {
  "name": "sunbul",
  "canvas": [
-  640,
-  1000
+  760,
+  730
  ],
  "height_ratio": 0.66,
  "feet": [
-  320,
-  939
+  380,
+  675
  ],
  "layers": [
   {
@@ -28,35 +28,47 @@
   {
    "role": "arm",
    "id": "l",
-   "image": "arm_l_rest.png",
+   "image": "arm_l.png",
    "pivot": [
-    200,
-    348
+    277,
+    266
    ],
    "up": -150,
-   "point": -95,
-   "poses": {
-    "rest": "arm_l_rest.png",
-    "open": "arm_l_open.png",
-    "point": "arm_l_point.png"
-   }
+   "point": -95
+  },
+  {
+   "role": "arm",
+   "id": "ls",
+   "image": "sleeve_l.png",
+   "follow": "l",
+   "factor": 0.85,
+   "pivot": [
+    277,
+    266
+   ]
   },
   {
    "role": "arm",
    "id": "r",
-   "image": "arm_r_rest.png",
+   "image": "arm_r.png",
    "pivot": [
-    441,
-    348
+    483,
+    266
    ],
    "up": 150,
    "point": 95,
-   "main": true,
-   "poses": {
-    "rest": "arm_r_rest.png",
-    "open": "arm_r_open.png",
-    "point": "arm_r_point.png"
-   }
+   "main": true
+  },
+  {
+   "role": "arm",
+   "id": "rs",
+   "image": "sleeve_r.png",
+   "follow": "r",
+   "factor": 0.85,
+   "pivot": [
+    483,
+    266
+   ]
   }
  ]
 }

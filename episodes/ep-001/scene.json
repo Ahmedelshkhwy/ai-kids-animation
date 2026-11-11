@@ -5,10 +5,10 @@
       "background": "placeholder_plain",
       "camera": {
         "move": "push_in",
-        "zoom": 1.1,
+        "zoom": 1.08,
         "focus": [
           0.5,
-          0.35
+          0.4
         ]
       },
       "transition": "fade",
@@ -17,9 +17,9 @@
           "id": "sunbul",
           "pos": [
             0.5,
-            1.13
+            1.17
           ],
-          "scale": 1.35,
+          "scale": 1.4,
           "enter": "left"
         }
       ],

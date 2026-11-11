@@ -54,6 +54,8 @@ class Character:
         """Angles (degrees, counter-clockwise positive) for every arm layer."""
         out = {}
         for L in self.arms:
+            if L.get("follow"):          # e.g. a sleeve that rides along with the arm
+                continue
             up = L.get("up", 120)
             sway = 3 * math.sin(2 * math.pi * t / 2.0 + len(L["id"]))
             ang = sway
@@ -66,6 +68,9 @@ class Character:
                 else:
                     ang = f * up + (1 - f) * sway
             out[L["id"]] = ang
+        for L in self.arms:
+            if L.get("follow"):
+                out[L["id"]] = out.get(L["follow"], 0.0) * L.get("factor", 1.0)
         return out
 
     def _pose_image(self, L, gesture):
